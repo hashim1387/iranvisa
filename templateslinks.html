@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>ویزای ایران | Visa Iran</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font/dist/font-face.css ">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Vazir;
+      background: url("/static/man.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #1abc9c, #16a085);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .lang-selection {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+    .lang-selection h2 {
+      color: #2c3e50;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+    }
+    .lang-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .lang-btn {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 150px;
+      font-weight: bold;
+    }
+    .lang-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .content-area {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    .section {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    .section h2 {
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #ecf0f1;
+    }
+    .links-list {
+      list-style: none;
+      padding: 0;
+    }
+    .links-list li {
+      background: #f8f9fa;
+      margin: 0.8rem 0;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      border-right: 4px solid #3498db;
+    }
+    .links-list li:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .links-list a {
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .files-list {
+      list-style: none;
+      padding: 0;
+    }
+    .files-list li {
+      background: #f8f9fa;
+      margin: 0.8rem 0;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      border-right: 4px solid #27ae60;
+    }
+    .files-list li:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .file-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .file-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .btn {
+      padding: 0.5rem 1.2rem;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-download {
+      background: #f39c12;
+      color: white;
+    }
+    .btn-download:hover {
+      background: #e67e22;
+    }
+    .btn-delete {
+      background: #e74c3c;
+      color: white;
+    }
+    .btn-delete:hover {
+      background: #c0392b;
+    }
+    .btn-add {
+      background: #27ae60;
+      color: white;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 25px;
+    }
+    .btn-add:hover {
+      background: #229954;
+      transform: scale(1.05);
+    }
+    .add-button-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+    .popup-content {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 350px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: slideUp 0.3s ease;
+    }
+    .popup h3 {
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+    }
+    .popup input[type="password"] {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1.2rem;
+      text-align: center;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin: 1rem 0;
+      transition: border-color 0.3s ease;
+    }
+    .popup input[type="password"]:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+    .popup-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .popup-btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .popup-btn-ok {
+      background: #27ae60;
+      color: white;
+    }
+    .popup-btn-ok:hover {
+      background: #229954;
+    }
+    .popup-btn-cancel {
+      background: #e74c3c;
+      color: white;
+    }
+    .popup-btn-cancel:hover {
+      background: #c0392b;
+    }
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #27ae60;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 2000;
+      animation: slideUp 0.3s ease;
+    }
+    .toast.error {
+      background: #e74c3c;
+    }
+    /* Progress */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(0,0,0,0.1);
+      z-index: 3000;
+      display: none;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #27ae60, #2ecc71);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { 
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ویزای ایران | Visa Iran</h1>
+  </header>
+
+  <main>
+    <!-- Language Selection -->
+    <div id="langSelection" class="lang-selection">
+      <h2>لطفاً زبان خود را انتخاب کنید<br>Please select your language<br>مهرباني وکړئ خپله ژبه وټاکئ</h2>
+      <div class="lang-buttons">
+        <button class="lang-btn" onclick="selectLang('fa')">🇮🇷 فارسی</button>
+        <button class="lang-btn" onclick="selectLang('pa')">🇦🇫 پښتو</button>
+        <button class="lang-btn" onclick="selectLang('dr')">🇦🇫 دری</button>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div id="contentArea" class="content-area">
+      <div class="section">
+        <h2 id="linksHeading"></h2>
+        <ul id="linksList" class="links-list"></ul>
+      </div>
+
+      <div class="section">
+        <h2 id="filesHeading"></h2>
+        <!-- The warning message has been removed from here -->
+        <ul id="filesList" class="files-list"></ul>
+        
+        <!-- Add ZIP Button - Always Visible -->
+        <div class="add-button-container">
+          <button class="btn btn-add" id="addBtn" onclick="showFileInput()">
+            <span id="addBtnText"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Password Popup -->
+  <div class="popup" id="passwordPopup">
+    <div class="popup-content">
+      <h3 id="passwordTitle"></h3>
+      <input type="password" id="passwordInput" maxlength="4" autocomplete="off" placeholder="رمز را وارد کنید">
+      <div class="popup-buttons">
+        <button class="popup-btn popup-btn-ok" onclick="checkPassword()">تأیید</button>
+        <button class="popup-btn popup-btn-cancel" onclick="closePasswordPopup()">انصراف</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Progress Bar -->
+  <div class="progress-container" id="progressContainer">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <script>
+    // Content for all languages
+    const content = {
+      fa: {
+        linksHeading: "📌 لینک‌های مفید برای ویزای ایران",
+        links: [
+          { text: "درخواست ویزای آنلاین ایران", url: "https://evisatraveller.mfa.ir/fa/request/applyrequest/ " },
+          { text: "پیگیری ویزا", url: "https://evisatraveller.mfa.ir/fa/request/status/ " }
+        ],
+        filesHeading: "📦 فایل‌های فنی (ZIP)",
+        addBtnText: "➕ Add ZIP",
+        passwordTitle: "رمز عبور مدیر (لوگری صیب)",
+        confirmBtn: "تأیید",
+        cancelBtn: "انصراف",
+        uploadSuccess: "فایل با موفقیت آپلود شد",
+        uploadError: "خطا در آپلود فایل",
+        deleteConfirm: "آیا از حذف این فایل اطمینان دارید؟",
+        deleteSuccess: "فایل با موفقیت حذف شد",
+        downloadSuccess: "فایل با موفقیت دانلود شد",
+        passwordError: "رمز عبور اشتباه است",
+        noFiles: "هیچ فایلی یافت نشد"
+      },
+      pa: {
+        linksHeading: "📌 د ایران ویزا لپاره مفید لینکونه",
+        links: [
+          { text: "آنلاین ویزا غوښتنه", url: "https://evisatraveller.mfa.ir/fa/request/applyrequest/ " },
+          { text: "ویزا پیګیری", url: "https://evisatraveller.mfa.ir/fa/request/status/ " }
+        ],
+        filesHeading: "📦 تخنیکي فایلونه (ZIP)",
+        addBtnText: "➕ Add ZIP",
+        passwordTitle: "مدیریت رمز (لوگری صیب)",
+        confirmBtn: "تایید",
+        cancelBtn: "انصراف",
+        uploadSuccess: "فایل په بریالیتوب سره اپلوډ شو",
+        uploadError: "د فایل اپلوډ کولو کې تېروتنه",
+        deleteConfirm: "آیا تاسو د دې فایل ړنګولو څخه ډاړه یاست؟",
+        deleteSuccess: "فایل په بریالیتوب سره ړنګ شو",
+        downloadSuccess: "فایل په بریالیتوب سره ډاونلوډ شو",
+        passwordError: "ناسم رمز",
+        noFiles: "هیڅ فایل ونه موندل شو"
+      },
+      dr: {
+        linksHeading: "📌 لینک های مفید برای ویزای ایران",
+        links: [
+          { text: "درخواست ویزای آنلاین ایران", url: "https://evisatraveller.mfa.ir/fa/request/applyrequest/ " },
+          { text: "پیگیری ویزا", url: "https://evisatraveller.mfa.ir/fa/request/status/ " }
+        ],
+        filesHeading: "📦 فایل های فنی (ZIP)",
+        addBtnText: "➕ Add ZIP",
+        passwordTitle: "رمز عبور مدیر (ضیاجان)",
+        confirmBtn: "تأیید",
+        cancelBtn: "انصراف",
+        uploadSuccess: "فایل با موفقیت آپلود شد",
+        uploadError: "خطا در آپلود فایل",
+        deleteConfirm: "آیا از حذف این فایل اطمینان دارید؟",
+        deleteSuccess: "فایل با موفقیت حذف شد",
+        downloadSuccess: "فایل با موفقیت دانلود شد",
+        passwordError: "رمز عبور اشتباه است",
+        noFiles: "هیچ فایلی یافت نشد"
+      }
+    };
+
+    let currentLang = 'fa';
+    let pendingAction = null; // Will store { type: 'download'/'delete', filename: string }
+    const CORRECT_PASSWORD = '1387';
+
+    // Initialize local storage
+    function initStorage() {
+      if (!localStorage.getItem('zipFiles')) {
+        localStorage.setItem('zipFiles', JSON.stringify([]));
+      }
+    }
+
+    // Get stored files
+    function getStoredFiles() {
+      return JSON.parse(localStorage.getItem('zipFiles') || '[]');
+    }
+
+    // Save file to storage
+    function saveFileToStorage(filename, data) {
+      const files = getStoredFiles();
+      // Check if file already exists
+      const existingIndex = files.findIndex(f => f.name === filename);
+      if (existingIndex !== -1) {
+        files[existingIndex] = { name: filename, data: data, timestamp: Date.now() };
+      } else {
+        files.push({ name: filename, data: data, timestamp: Date.now() });
+      }
+      localStorage.setItem('zipFiles', JSON.stringify(files));
+    }
+
+    // Delete file from storage
+    function deleteFileFromStorage(filename) {
+      const files = getStoredFiles();
+      const filtered = files.filter(f => f.name !== filename);
+      localStorage.setItem('zipFiles', JSON.stringify(filtered));
+    }
+
+    // Show toast notification
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = isError ? 'toast error' : 'toast';
+      toast.style.display = 'block';
+      
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+
+    // Show progress
+    function showProgress() {
+      const container = document.getElementById('progressContainer');
+      const bar = document.getElementById('progressBar');
+      
+      container.style.display = 'block';
+      bar.style.width = '0%';
+      
+      let width = 0;
+      const interval = setInterval(() => {
+        width += 5;
+        bar.style.width = width + '%';
+        
+        if (width >= 90) {
+          clearInterval(interval);
+        }
+      }, 50);
+      
+      return () => {
+        clearInterval(interval);
+        bar.style.width = '100%';
+        setTimeout(() => {
+          container.style.display = 'none';
+        }, 500);
+      };
+    }
+
+    // Convert file to base64
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Download file
+    function downloadFile(filename, base64Data) {
+      const link = document.createElement('a');
+      link.href = base64Data;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Select language
+    function selectLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('selectedLang', lang);
+      document.getElementById('langSelection').style.display = 'none';
+      document.getElementById('contentArea').style.display = 'block';
+      document.documentElement.lang = lang;
+      
+      loadContent();
+    }
+
+    // Load content
+    function loadContent() {
+      const langData = content[currentLang];
+      
+      // Update headings
+      document.getElementById('linksHeading').textContent = langData.linksHeading;
+      document.getElementById('filesHeading').textContent = langData.filesHeading;
+      document.getElementById('addBtnText').textContent = langData.addBtnText;
+      
+      // Load links
+      const linksList = document.getElementById('linksList');
+      linksList.innerHTML = '';
+      langData.links.forEach(link => {
+        linksList.innerHTML += `
+          <li>
+            <a href="${link.url}" target="_blank">
+              🔗 ${link.text}
+            </a>
+          </li>
+        `;
+      });
+      
+      // Load files
+      loadFiles();
+    }
+
+    // Load files
+    function loadFiles() {
+      const files = getStoredFiles();
+      const filesList = document.getElementById('filesList');
+      const langData = content[currentLang];
+      
+      filesList.innerHTML = '';
+      
+      if (files.length === 0) {
+        filesList.innerHTML = `<li style="text-align: center; color: #7f8c8d;">${langData.noFiles}</li>`;
+        return;
+      }
+      
+      files.forEach(file => {
+        const date = new Date(file.timestamp).toLocaleDateString();
+        const fileSize = Math.round(file.data.length * 0.75 / 1024); // Approximate size in KB
+        
+        filesList.innerHTML += `
+          <li>
+            <div class="file-info">
+              📁 ${file.name}
+              <small style="color: #7f8c8d;">(${fileSize} KB - ${date})</small>
+            </div>
+            <div class="file-actions">
+              <a href="#" class="btn btn-delete" onclick="requestDeleteFile('${file.name}'); return false;">🗑️</a>
+              <a href="#" class="btn btn-download" onclick="requestDownloadFile('${file.name}'); return false;">⬇️</a>
+            </div>
+          </li>
+        `;
+      });
+    }
+
+    // Request download file (show password popup)
+    function requestDownloadFile(filename) {
+      pendingAction = { type: 'download', filename: filename };
+      showPasswordPopup();
+    }
+
+    // Request delete file (show password popup)
+    function requestDeleteFile(filename) {
+      const langData = content[currentLang];
+      if (confirm(langData.deleteConfirm)) {
+        pendingAction = { type: 'delete', filename: filename };
+        showPasswordPopup();
+      }
+    }
+
+    // Show password popup
+    function showPasswordPopup() {
+      const langData = content[currentLang];
+      document.getElementById('passwordTitle').textContent = langData.passwordTitle;
+      document.querySelector('.popup-btn-ok').textContent = langData.confirmBtn;
+      document.querySelector('.popup-btn-cancel').textContent = langData.cancelBtn;
+      document.getElementById('passwordPopup').style.display = 'flex';
+      document.getElementById('passwordInput').value = '';
+      document.getElementById('passwordInput').focus();
+    }
+
+    // Close password popup
+    function closePasswordPopup() {
+      document.getElementById('passwordPopup').style.display = 'none';
+      pendingAction = null;
+    }
+
+    // Check password and execute action
+    function checkPassword() {
+      const password = document.getElementById('passwordInput').value;
+      const langData = content[currentLang];
+      
+      if (password === CORRECT_PASSWORD) {
+        // Password is correct, execute the pending action
+        if (pendingAction) {
+          if (pendingAction.type === 'download') {
+            // Download the file
+            const files = getStoredFiles();
+            const file = files.find(f => f.name === pendingAction.filename);
+            if (file) {
+              downloadFile(pendingAction.filename, file.data);
+              showToast(langData.downloadSuccess);
+            } else {
+              showToast('فایل یافت نشد', true);
+            }
+          } else if (pendingAction.type === 'delete') {
+            // Delete the file
+            deleteFileFromStorage(pendingAction.filename);
+            showToast(langData.deleteSuccess);
+            loadFiles(); // Refresh the file list
+          }
+        }
+        
+        // Close popup and clear pending action
+        closePasswordPopup();
+      } else {
+        // Password is incorrect
+        showToast(langData.passwordError, true);
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+      }
+    }
+
+    // Show file input (directly, no password)
+    function showFileInput() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.zip';
+      input.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const finishProgress = showProgress();
+        const langData = content[currentLang];
+        
+        try {
+          const base64Data = await fileToBase64(file);
+          saveFileToStorage(file.name, base64Data);
+          
+          finishProgress();
+          showToast(langData.uploadSuccess);
+          loadFiles();
+        } catch (error) {
+          finishProgress();
+          showToast(langData.uploadError, true);
+        }
+      };
+      input.click();
+    }
+
+    // Initialize on load
+    window.onload = () => {
+      initStorage();
+      const savedLang = localStorage.getItem('selectedLang');
+      if (savedLang && ['fa', 'pa', 'dr'].includes(savedLang)) {
+        selectLang(savedLang);
+      }
+    };
+
+    // Handle Enter key in password input
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          checkPassword();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
